@@ -317,6 +317,11 @@ namespace wxapkg解包
 
         private void btnLink1_Click(object sender, EventArgs e)
         {
+            Process.Start("Explorer.exe", "http://www.bejson.com/jshtml_format/");
+        }
+
+        private void btnLink2_Click(object sender, EventArgs e)
+        {
             Process.Start("Explorer.exe", "https://beautifier.io");
         }
 

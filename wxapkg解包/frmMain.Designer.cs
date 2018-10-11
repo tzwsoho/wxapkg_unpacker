@@ -41,13 +41,14 @@
             this.txtContent = new System.Windows.Forms.TextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnCopy = new System.Windows.Forms.ToolStripButton();
-            this.btnLink1 = new System.Windows.Forms.ToolStripButton();
+            this.btnBeautifyJS = new System.Windows.Forms.ToolStripButton();
+            this.btnWordWrap = new System.Windows.Forms.ToolStripButton();
+            this.btnLink2 = new System.Windows.Forms.ToolStripButton();
             this.gbWXAPKG = new System.Windows.Forms.GroupBox();
             this.btnWXAPKG = new System.Windows.Forms.Button();
             this.txtWXAPKG = new System.Windows.Forms.TextBox();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
-            this.btnWordWrap = new System.Windows.Forms.ToolStripButton();
-            this.btnBeautifyJS = new System.Windows.Forms.ToolStripButton();
+            this.btnLink1 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -173,6 +174,7 @@
             this.btnCopy,
             this.btnBeautifyJS,
             this.btnWordWrap,
+            this.btnLink2,
             this.btnLink1});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
@@ -189,16 +191,40 @@
             this.btnCopy.Text = "复制代码";
             this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
-            // btnLink1
+            // btnBeautifyJS
             // 
-            this.btnLink1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnLink1.Image = ((System.Drawing.Image)(resources.GetObject("btnLink1.Image")));
-            this.btnLink1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLink1.Name = "btnLink1";
-            this.btnLink1.Size = new System.Drawing.Size(139, 22);
-            this.btnLink1.Text = "https://beautifier.io";
-            this.btnLink1.ToolTipText = "跳转到 https://beautifier.io";
-            this.btnLink1.Click += new System.EventHandler(this.btnLink1_Click);
+            this.btnBeautifyJS.CheckOnClick = true;
+            this.btnBeautifyJS.Image = ((System.Drawing.Image)(resources.GetObject("btnBeautifyJS.Image")));
+            this.btnBeautifyJS.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnBeautifyJS.Name = "btnBeautifyJS";
+            this.btnBeautifyJS.Size = new System.Drawing.Size(76, 22);
+            this.btnBeautifyJS.Text = "美化代码";
+            this.btnBeautifyJS.ToolTipText = "此操作可能耗时非常久，慎用！！！";
+            this.btnBeautifyJS.Click += new System.EventHandler(this.btnBeautifyJS_Click);
+            // 
+            // btnWordWrap
+            // 
+            this.btnWordWrap.Checked = true;
+            this.btnWordWrap.CheckOnClick = true;
+            this.btnWordWrap.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btnWordWrap.Image = ((System.Drawing.Image)(resources.GetObject("btnWordWrap.Image")));
+            this.btnWordWrap.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnWordWrap.Name = "btnWordWrap";
+            this.btnWordWrap.Size = new System.Drawing.Size(76, 22);
+            this.btnWordWrap.Text = "自动换行";
+            this.btnWordWrap.Click += new System.EventHandler(this.btnWordWrap_Click);
+            // 
+            // btnLink2
+            // 
+            this.btnLink2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnLink2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLink2.Image = ((System.Drawing.Image)(resources.GetObject("btnLink2.Image")));
+            this.btnLink2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLink2.Name = "btnLink2";
+            this.btnLink2.Size = new System.Drawing.Size(23, 22);
+            this.btnLink2.Text = "https://beautifier.io";
+            this.btnLink2.ToolTipText = "跳转到 https://beautifier.io";
+            this.btnLink2.Click += new System.EventHandler(this.btnLink2_Click);
             // 
             // gbWXAPKG
             // 
@@ -239,28 +265,17 @@
             this.ofd.DefaultExt = "wxapkg";
             this.ofd.Filter = "WXAPKG 文件(*.wxapkg)|*.wxapkg|所有文件(*.*)|*.*";
             // 
-            // btnWordWrap
+            // btnLink1
             // 
-            this.btnWordWrap.Checked = true;
-            this.btnWordWrap.CheckOnClick = true;
-            this.btnWordWrap.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.btnWordWrap.Image = ((System.Drawing.Image)(resources.GetObject("btnWordWrap.Image")));
-            this.btnWordWrap.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnWordWrap.Name = "btnWordWrap";
-            this.btnWordWrap.Size = new System.Drawing.Size(76, 22);
-            this.btnWordWrap.Text = "自动换行";
-            this.btnWordWrap.Click += new System.EventHandler(this.btnWordWrap_Click);
-            // 
-            // btnBeautifyJS
-            // 
-            this.btnBeautifyJS.CheckOnClick = true;
-            this.btnBeautifyJS.Image = ((System.Drawing.Image)(resources.GetObject("btnBeautifyJS.Image")));
-            this.btnBeautifyJS.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnBeautifyJS.Name = "btnBeautifyJS";
-            this.btnBeautifyJS.Size = new System.Drawing.Size(76, 22);
-            this.btnBeautifyJS.Text = "美化代码";
-            this.btnBeautifyJS.ToolTipText = "此操作可能耗时非常久，慎用！！！";
-            this.btnBeautifyJS.Click += new System.EventHandler(this.btnBeautifyJS_Click);
+            this.btnLink1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnLink1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLink1.Image = ((System.Drawing.Image)(resources.GetObject("btnLink1.Image")));
+            this.btnLink1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLink1.Name = "btnLink1";
+            this.btnLink1.Size = new System.Drawing.Size(23, 22);
+            this.btnLink1.Text = "http://www.bejson.com/jshtml_format/";
+            this.btnLink1.ToolTipText = "跳转到 http://www.bejson.com/jshtml_format/";
+            this.btnLink1.Click += new System.EventHandler(this.btnLink1_Click);
             // 
             // frmMain
             // 
@@ -307,9 +322,10 @@
         private System.Windows.Forms.ToolStripButton btnListView;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton btnCopy;
-        private System.Windows.Forms.ToolStripButton btnLink1;
+        private System.Windows.Forms.ToolStripButton btnLink2;
         private System.Windows.Forms.ToolStripButton btnWordWrap;
         private System.Windows.Forms.ToolStripButton btnBeautifyJS;
+        private System.Windows.Forms.ToolStripButton btnLink1;
     }
 }
 
