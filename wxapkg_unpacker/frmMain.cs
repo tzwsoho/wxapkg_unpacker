@@ -249,6 +249,7 @@ namespace wxapkg_unpacker
                     txtContent.Text = content;
                     txtContent.BringToFront();
                     tsContent.Enabled = true;
+                    btnBeautifyJS.Enabled = true;
                 }
                 else if (file_name.EndsWith(".png") ||
                          file_name.EndsWith(".jpg") ||
@@ -262,6 +263,14 @@ namespace wxapkg_unpacker
                     picPreview.BackgroundImage = bmp;
                     picPreview.BringToFront();
                     tsContent.Enabled = false;
+                }
+                else
+                {
+                    string content = Encoding.UTF8.GetString(b_content);
+                    txtContent.Text = content;
+                    txtContent.BringToFront();
+                    tsContent.Enabled = true;
+                    btnBeautifyJS.Enabled = false;
                 }
             }
             catch (Exception ex)
@@ -336,7 +345,7 @@ namespace wxapkg_unpacker
             ShowFileContent(file);
         }
 
-        private void tvwFileList_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void tvwFileList_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (null == e.Node ||
                 e.Node.Nodes.Count > 0)
@@ -421,6 +430,17 @@ namespace wxapkg_unpacker
                     btnBeautifyJS.Checked = false;
                     return;
                 }
+            }
+
+            if (btnTreeView.Checked)
+            {
+                tvwFileList_AfterSelect(null,
+                    new TreeViewEventArgs(
+                        tvwFileList.SelectedNode));
+            }
+            else
+            {
+                lvwFileList_SelectedIndexChanged(null, null);
             }
         }
 

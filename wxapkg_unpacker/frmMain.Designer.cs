@@ -39,6 +39,7 @@
             this.btnTreeView = new System.Windows.Forms.ToolStripButton();
             this.btnListView = new System.Windows.Forms.ToolStripButton();
             this.btnSaveAs = new System.Windows.Forms.ToolStripButton();
+            this.picPreview = new System.Windows.Forms.PictureBox();
             this.txtContent = new System.Windows.Forms.TextBox();
             this.tsContent = new System.Windows.Forms.ToolStrip();
             this.btnCopy = new System.Windows.Forms.ToolStripButton();
@@ -51,15 +52,14 @@
             this.txtWXAPKG = new System.Windows.Forms.TextBox();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
-            this.picPreview = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tsList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.tsContent.SuspendLayout();
             this.gbWXAPKG.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -94,7 +94,7 @@
             this.tvwFileList.ShowNodeToolTips = true;
             this.tvwFileList.Size = new System.Drawing.Size(288, 425);
             this.tvwFileList.TabIndex = 1;
-            this.tvwFileList.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvwFileList_NodeMouseClick);
+            this.tvwFileList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvwFileList_AfterSelect);
             // 
             // lvwFileList
             // 
@@ -170,6 +170,16 @@
             this.btnSaveAs.Size = new System.Drawing.Size(73, 22);
             this.btnSaveAs.Text = "另存为...";
             this.btnSaveAs.Click += new System.EventHandler(this.btnSaveAs_Click);
+            // 
+            // picPreview
+            // 
+            this.picPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.picPreview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picPreview.Location = new System.Drawing.Point(0, 25);
+            this.picPreview.Name = "picPreview";
+            this.picPreview.Size = new System.Drawing.Size(689, 425);
+            this.picPreview.TabIndex = 2;
+            this.picPreview.TabStop = false;
             // 
             // txtContent
             // 
@@ -293,16 +303,6 @@
             this.ofd.DefaultExt = "wxapkg";
             this.ofd.Filter = "WXAPKG 文件(*.wxapkg)|*.wxapkg|所有文件(*.*)|*.*";
             // 
-            // picPreview
-            // 
-            this.picPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.picPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picPreview.Location = new System.Drawing.Point(0, 25);
-            this.picPreview.Name = "picPreview";
-            this.picPreview.Size = new System.Drawing.Size(689, 425);
-            this.picPreview.TabIndex = 2;
-            this.picPreview.TabStop = false;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -313,7 +313,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "wxapkg解包 -- TZWSOHO";
+            this.Text = "wxapkg_unpacker -- TZWSOHO";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -322,11 +322,11 @@
             this.splitContainer1.ResumeLayout(false);
             this.tsList.ResumeLayout(false);
             this.tsList.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
             this.tsContent.ResumeLayout(false);
             this.tsContent.PerformLayout();
             this.gbWXAPKG.ResumeLayout(false);
             this.gbWXAPKG.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
             this.ResumeLayout(false);
 
         }
