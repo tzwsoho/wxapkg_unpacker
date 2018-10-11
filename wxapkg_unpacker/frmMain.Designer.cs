@@ -1,4 +1,4 @@
-﻿namespace wxapkg解包
+﻿namespace wxapkg_unpacker
 {
     partial class frmMain
     {
@@ -35,27 +35,31 @@
             this.colFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colOffset = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsList = new System.Windows.Forms.ToolStrip();
             this.btnTreeView = new System.Windows.Forms.ToolStripButton();
             this.btnListView = new System.Windows.Forms.ToolStripButton();
+            this.btnSaveAs = new System.Windows.Forms.ToolStripButton();
             this.txtContent = new System.Windows.Forms.TextBox();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.tsContent = new System.Windows.Forms.ToolStrip();
             this.btnCopy = new System.Windows.Forms.ToolStripButton();
             this.btnBeautifyJS = new System.Windows.Forms.ToolStripButton();
             this.btnWordWrap = new System.Windows.Forms.ToolStripButton();
             this.btnLink2 = new System.Windows.Forms.ToolStripButton();
+            this.btnLink1 = new System.Windows.Forms.ToolStripButton();
             this.gbWXAPKG = new System.Windows.Forms.GroupBox();
             this.btnWXAPKG = new System.Windows.Forms.Button();
             this.txtWXAPKG = new System.Windows.Forms.TextBox();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
-            this.btnLink1 = new System.Windows.Forms.ToolStripButton();
+            this.sfd = new System.Windows.Forms.SaveFileDialog();
+            this.picPreview = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
+            this.tsList.SuspendLayout();
+            this.tsContent.SuspendLayout();
             this.gbWXAPKG.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -70,12 +74,13 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.tvwFileList);
             this.splitContainer1.Panel1.Controls.Add(this.lvwFileList);
-            this.splitContainer1.Panel1.Controls.Add(this.toolStrip1);
+            this.splitContainer1.Panel1.Controls.Add(this.tsList);
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.picPreview);
             this.splitContainer1.Panel2.Controls.Add(this.txtContent);
-            this.splitContainer1.Panel2.Controls.Add(this.toolStrip2);
+            this.splitContainer1.Panel2.Controls.Add(this.tsContent);
             this.splitContainer1.Size = new System.Drawing.Size(981, 450);
             this.splitContainer1.SplitterDistance = 288;
             this.splitContainer1.TabIndex = 0;
@@ -123,17 +128,18 @@
             // 
             this.colOffset.Text = "偏移";
             // 
-            // toolStrip1
+            // tsList
             // 
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsList.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnTreeView,
-            this.btnListView});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(288, 25);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
+            this.btnListView,
+            this.btnSaveAs});
+            this.tsList.Location = new System.Drawing.Point(0, 0);
+            this.tsList.Name = "tsList";
+            this.tsList.Size = new System.Drawing.Size(288, 25);
+            this.tsList.TabIndex = 2;
+            this.tsList.Text = "toolStrip1";
             // 
             // btnTreeView
             // 
@@ -155,6 +161,16 @@
             this.btnListView.Text = "列表框";
             this.btnListView.Click += new System.EventHandler(this.btnViewSwitch_Click);
             // 
+            // btnSaveAs
+            // 
+            this.btnSaveAs.Enabled = false;
+            this.btnSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAs.Image")));
+            this.btnSaveAs.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSaveAs.Name = "btnSaveAs";
+            this.btnSaveAs.Size = new System.Drawing.Size(73, 22);
+            this.btnSaveAs.Text = "另存为...";
+            this.btnSaveAs.Click += new System.EventHandler(this.btnSaveAs_Click);
+            // 
             // txtContent
             // 
             this.txtContent.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -167,20 +183,20 @@
             this.txtContent.Size = new System.Drawing.Size(689, 425);
             this.txtContent.TabIndex = 0;
             // 
-            // toolStrip2
+            // tsContent
             // 
-            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsContent.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsContent.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnCopy,
             this.btnBeautifyJS,
             this.btnWordWrap,
             this.btnLink2,
             this.btnLink1});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(689, 25);
-            this.toolStrip2.TabIndex = 1;
-            this.toolStrip2.Text = "toolStrip2";
+            this.tsContent.Location = new System.Drawing.Point(0, 0);
+            this.tsContent.Name = "tsContent";
+            this.tsContent.Size = new System.Drawing.Size(689, 25);
+            this.tsContent.TabIndex = 1;
+            this.tsContent.Text = "toolStrip2";
             // 
             // btnCopy
             // 
@@ -226,6 +242,18 @@
             this.btnLink2.ToolTipText = "跳转到 https://beautifier.io";
             this.btnLink2.Click += new System.EventHandler(this.btnLink2_Click);
             // 
+            // btnLink1
+            // 
+            this.btnLink1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnLink1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLink1.Image = ((System.Drawing.Image)(resources.GetObject("btnLink1.Image")));
+            this.btnLink1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLink1.Name = "btnLink1";
+            this.btnLink1.Size = new System.Drawing.Size(23, 22);
+            this.btnLink1.Text = "http://www.bejson.com/jshtml_format/";
+            this.btnLink1.ToolTipText = "跳转到 http://www.bejson.com/jshtml_format/";
+            this.btnLink1.Click += new System.EventHandler(this.btnLink1_Click);
+            // 
             // gbWXAPKG
             // 
             this.gbWXAPKG.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -265,17 +293,15 @@
             this.ofd.DefaultExt = "wxapkg";
             this.ofd.Filter = "WXAPKG 文件(*.wxapkg)|*.wxapkg|所有文件(*.*)|*.*";
             // 
-            // btnLink1
+            // picPreview
             // 
-            this.btnLink1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnLink1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLink1.Image = ((System.Drawing.Image)(resources.GetObject("btnLink1.Image")));
-            this.btnLink1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLink1.Name = "btnLink1";
-            this.btnLink1.Size = new System.Drawing.Size(23, 22);
-            this.btnLink1.Text = "http://www.bejson.com/jshtml_format/";
-            this.btnLink1.ToolTipText = "跳转到 http://www.bejson.com/jshtml_format/";
-            this.btnLink1.Click += new System.EventHandler(this.btnLink1_Click);
+            this.picPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.picPreview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picPreview.Location = new System.Drawing.Point(0, 25);
+            this.picPreview.Name = "picPreview";
+            this.picPreview.Size = new System.Drawing.Size(689, 425);
+            this.picPreview.TabIndex = 2;
+            this.picPreview.TabStop = false;
             // 
             // frmMain
             // 
@@ -294,12 +320,13 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            this.tsList.ResumeLayout(false);
+            this.tsList.PerformLayout();
+            this.tsContent.ResumeLayout(false);
+            this.tsContent.PerformLayout();
             this.gbWXAPKG.ResumeLayout(false);
             this.gbWXAPKG.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -317,15 +344,18 @@
         private System.Windows.Forms.TextBox txtWXAPKG;
         private System.Windows.Forms.OpenFileDialog ofd;
         private System.Windows.Forms.TreeView tvwFileList;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip tsList;
         private System.Windows.Forms.ToolStripButton btnTreeView;
         private System.Windows.Forms.ToolStripButton btnListView;
-        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStrip tsContent;
         private System.Windows.Forms.ToolStripButton btnCopy;
         private System.Windows.Forms.ToolStripButton btnLink2;
         private System.Windows.Forms.ToolStripButton btnWordWrap;
         private System.Windows.Forms.ToolStripButton btnBeautifyJS;
         private System.Windows.Forms.ToolStripButton btnLink1;
+        private System.Windows.Forms.ToolStripButton btnSaveAs;
+        private System.Windows.Forms.SaveFileDialog sfd;
+        private System.Windows.Forms.PictureBox picPreview;
     }
 }
 

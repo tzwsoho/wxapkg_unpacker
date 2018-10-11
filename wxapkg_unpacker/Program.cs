@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace wxapkg解包
+namespace wxapkg_unpacker
 {
     static class Program
     {

@@ -2,13 +2,14 @@
 using System.IO;
 using System.Text;
 using System.Net;
+using System.Drawing;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 using JSBeautifyLib;
 
-namespace wxapkg解包
+namespace wxapkg_unpacker
 {
     public partial class frmMain : Form
     {
@@ -179,7 +180,10 @@ namespace wxapkg解包
             }
             finally
             {
-                fs.Close();
+                if (null != fs)
+                {
+                    fs.Close();
+                }
             }
         }
 
@@ -230,17 +234,35 @@ namespace wxapkg解包
                 fs.Read(b_content, 0, file.m_size);
                 fs.Close();
 
-                string content = Encoding.UTF8.GetString(b_content);
-                if (btnBeautifyJS.Checked &&
-                    (file.m_name.EndsWith(".js") ||
-                     file.m_name.EndsWith(".json")))
+                string file_name = file.m_name.ToLower();
+                if (file_name.EndsWith(".js") ||
+                    file_name.EndsWith(".json"))
                 {
-                    JSBeautifyOptions jsbo = new JSBeautifyOptions();
-                    JSBeautify jsb = new JSBeautify(content, jsbo);
-                    content = jsb.GetResult();
-                }
+                    string content = Encoding.UTF8.GetString(b_content);
+                    if (btnBeautifyJS.Checked)
+                    {
+                        JSBeautifyOptions jsbo = new JSBeautifyOptions();
+                        JSBeautify jsb = new JSBeautify(content, jsbo);
+                        content = jsb.GetResult();
+                    }
 
-                txtContent.Text = content;
+                    txtContent.Text = content;
+                    txtContent.BringToFront();
+                    tsContent.Enabled = true;
+                }
+                else if (file_name.EndsWith(".png") ||
+                         file_name.EndsWith(".jpg") ||
+                         file_name.EndsWith(".gif") ||
+                         file_name.EndsWith(".bmp"))
+                {
+                    MemoryStream ms = new MemoryStream(b_content);
+                    Bitmap bmp = (Bitmap)Bitmap.FromStream(ms);
+                    ms.Close();
+
+                    picPreview.BackgroundImage = bmp;
+                    picPreview.BringToFront();
+                    tsContent.Enabled = false;
+                }
             }
             catch (Exception ex)
             {
@@ -248,7 +270,52 @@ namespace wxapkg解包
             }
             finally
             {
+                if (null != fs)
+                {
+                    fs.Close();
+                }
+            }
+        }
+
+        private void SaveFileAs(WXAPKG_FILE file)
+        {
+            if ("" == txtWXAPKG.Text ||
+                null == file)
+            {
+                return;
+            }
+
+            sfd.FileName = file.m_name.Substring(file.m_name.LastIndexOf('/') + 1);
+            if (DialogResult.OK != sfd.ShowDialog())
+            {
+                return;
+            }
+
+            FileStream fs = null;
+            try
+            {
+                fs = new FileStream(txtWXAPKG.Text, FileMode.Open, FileAccess.Read);
+
+                byte[] b_content = new byte[file.m_size];
+                fs.Seek((long)file.m_offset, SeekOrigin.Begin);
+                fs.Read(b_content, 0, b_content.Length);
                 fs.Close();
+
+                fs = new FileStream(sfd.FileName, FileMode.Create, FileAccess.ReadWrite);
+                fs.Write(b_content, 0, b_content.Length);
+
+                MessageBox.Show("成功保存到：" + sfd.FileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                if (null != fs)
+                {
+                    fs.Close();
+                }
             }
         }
 
@@ -265,6 +332,7 @@ namespace wxapkg解包
                 return;
             }
 
+            btnSaveAs.Enabled = true;
             ShowFileContent(file);
         }
 
@@ -273,6 +341,7 @@ namespace wxapkg解包
             if (null == e.Node ||
                 e.Node.Nodes.Count > 0)
             {
+                btnSaveAs.Enabled = false;
                 return;
             }
 
@@ -282,6 +351,7 @@ namespace wxapkg解包
                 return;
             }
 
+            btnSaveAs.Enabled = true;
             ShowFileContent(file);
         }
 
@@ -301,9 +371,34 @@ namespace wxapkg解包
             }
         }
 
-        private void btnWordWrap_Click(object sender, EventArgs e)
+        private void btnSaveAs_Click(object sender, EventArgs e)
         {
-            txtContent.WordWrap = btnWordWrap.Checked;
+            WXAPKG_FILE file = null;
+            if (btnListView.Checked)
+            {
+                if (1 != lvwFileList.SelectedItems.Count)
+                {
+                    return;
+                }
+
+                file = lvwFileList.SelectedItems[0].Tag as WXAPKG_FILE;
+            }
+            else
+            {
+                if (null == tvwFileList.SelectedNode)
+                {
+                    return;
+                }
+
+                file = tvwFileList.SelectedNode.Tag as WXAPKG_FILE;
+            }
+
+            if (null == file)
+            {
+                return;
+            }
+
+            SaveFileAs(file);
         }
 
         private void btnCopy_Click(object sender, EventArgs e)
@@ -313,16 +408,6 @@ namespace wxapkg解包
             Application.DoEvents();
 
             MessageBox.Show("已复制到剪贴板！");
-        }
-
-        private void btnLink1_Click(object sender, EventArgs e)
-        {
-            Process.Start("Explorer.exe", "http://www.bejson.com/jshtml_format/");
-        }
-
-        private void btnLink2_Click(object sender, EventArgs e)
-        {
-            Process.Start("Explorer.exe", "https://beautifier.io");
         }
 
         private void btnBeautifyJS_Click(object sender, EventArgs e)
@@ -337,6 +422,21 @@ namespace wxapkg解包
                     return;
                 }
             }
+        }
+
+        private void btnWordWrap_Click(object sender, EventArgs e)
+        {
+            txtContent.WordWrap = btnWordWrap.Checked;
+        }
+
+        private void btnLink1_Click(object sender, EventArgs e)
+        {
+            Process.Start("Explorer.exe", "http://www.bejson.com/jshtml_format/");
+        }
+
+        private void btnLink2_Click(object sender, EventArgs e)
+        {
+            Process.Start("Explorer.exe", "https://beautifier.io");
         }
     }
 }
